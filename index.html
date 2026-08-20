@@ -12,87 +12,74 @@
         }
 
         body {
-            background-color: #fcf8f5;
+            background-color: #000000; /* Sfondo totalmente nero */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            color: #5c4033;
-            transition: background 1s ease;
-        }
-
-        body.acceso {
-            background: radial-gradient(circle, #fff3e6 0%, #edd3be 100%);
+            color: #ffffff;
+            cursor: pointer;
         }
 
         .container {
             text-align: center;
-            cursor: pointer;
             padding: 20px;
-            max-width: 350px;
+            max-width: 400px;
             width: 100%;
         }
 
-        .diya-card {
-            background: #ffffff;
-            border: 2px solid #e8d7cd;
-            border-radius: 20px;
-            padding: 40px 20px;
-            box-shadow: 0 10px 25px rgba(92, 64, 51, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .diya-card:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Contenitore per video e immagine */
-        .diya-media-container {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 15px auto;
+        /* Immagine o Video a schermo intero senza bordi o riquadri */
+        .media-box {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px auto;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1a1a1a; /* Sfondo scuro per il video */
-            border-radius: 15px;
-            overflow: hidden;
         }
 
-        .diya-img {
+        .diya-img, .diya-video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
         }
 
         .diya-video {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
             display: none;
         }
 
+        /* Testi */
         .initial-text h1 {
-            font-size: 1.4rem;
-            color: #8c6250;
-            font-weight: 500;
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #f3f3f3;
+            margin-bottom: 8px;
+        }
+
+        .initial-text p {
+            font-size: 0.85rem;
+            color: #888888;
         }
 
         .hidden-message {
             display: none;
-            margin-top: 10px;
             animation: fadeIn 0.8s ease forwards;
         }
 
         .hidden-message h2 {
-            font-size: 1.3rem;
-            color: #8c6250;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #f3f3f3;
             margin-bottom: 8px;
+        }
+
+        .hidden-message p {
+            font-size: 1rem;
+            color: #cccccc;
         }
 
         @keyframes fadeIn {
@@ -104,38 +91,32 @@
 <body>
 
     <div class="container" onclick="accendiLuce()">
-        <div class="diya-card" id="card">
-            
-            <div class="diya-media-container">
-                <img src="diya-off.png" alt="Diya" class="diya-img" id="imgSpenta">
-                <video src="fuoco.mp4" class="diya-video" id="videoFuoco" autoplay loop muted playsinline></video>
-            </div>
-
-            <div class="initial-text" id="testoIniziale">
-                <h1>ਬੰਦੀ ਛੋੜ ਦਿਵਸ</h1>
-                <p>Tocca per accendere ✨</p>
-            </div>
-
-            <div class="hidden-message" id="messaggioNascosto">
-                <h2>ਬੰਦੀ ਛੋੜ ਦਿਵਸ</h2>
-                <p>Buon grandissimo Divas!</p>
-            </div>
-
+        
+        <div class="media-box">
+            <img src="diya-off.png" alt="Diya Spenta" class="diya-img" id="imgSpenta">
+            <video src="fuoco.mp4" class="diya-video" id="videoFuoco" autoplay loop muted playsinline></video>
         </div>
+
+        <div class="initial-text" id="testoIniziale">
+            <h1>ਬੰਦੀ ਛੋੜ ਦਿਵਸ</h1>
+            <p>Tocca per accendere</p>
+        </div>
+
+        <div class="hidden-message" id="messaggioNascosto">
+            <h2>ਬੰਦੀ ਛੋੜ ਦਿਵਸ</h2>
+            <p>Buon grandissimo Divas!</p>
+        </div>
+
     </div>
 
     <script>
         function accendiLuce() {
-            const card = document.getElementById('card');
             const testoIniziale = document.getElementById('testoIniziale');
             const messaggioNascosto = document.getElementById('messaggioNascosto');
             const imgSpenta = document.getElementById('imgSpenta');
             const videoFuoco = document.getElementById('videoFuoco');
 
-            if (!card.classList.contains('attivo')) {
-                card.classList.add('attivo');
-                document.body.classList.add('acceso');
-                
+            if (imgSpenta.style.display !== 'none') {
                 imgSpenta.style.display = 'none';
                 videoFuoco.style.display = 'block';
                 videoFuoco.play();
