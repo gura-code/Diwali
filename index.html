@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felice Diwali - Bandi Chhor Divas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fcf8f5; /* Sfondo pastello caldo e minimal */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            color: #5c4033;
+        }
+
+        .container {
+            text-align: center;
+            cursor: pointer;
+            padding: 20px;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        /* Stile della lampada / contenitore */
+        .diya-card {
+            background: #ffffff;
+            border: 2px solid #e8d7cd;
+            border-radius: 20px;
+            padding: 40px 20px;
+            box-shadow: 0 10px 25px rgba(92, 64, 51, 0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .diya-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Icona o disegno della Diya (spenta o accesa) */
+        .diya-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Fiamma animata in CSS */
+        .fiamma {
+            width: 16px;
+            height: 24px;
+            background: linear-gradient(to top, #ff7b00, #ffdd00);
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: trema 0.6s infinite alternate ease-in-out;
+            box-shadow: 0 0 15px 5px rgba(255, 221, 0, 0.6);
+            opacity: 0; /* Partenza spenta, si accende al click */
+            transition: opacity 0.5s ease;
+        }
+
+        /* Quando la card viene aperta, la fiamma si accende */
+        .open .fiamma {
+            opacity: 1;
+        }
+
+        @keyframes trema {
+            0% {
+                transform: translateX(-50%) scale(1) rotate(-1deg);
+            }
+            100% {
+                transform: translateX(-50%) scale(1.1) rotate(1deg);
+            }
+        }
+
+        /* Testo iniziale (prima del click) */
+        .initial-text h1 {
+            font-size: 1.4rem;
+            color: #8c6250;
+            font-weight: 500;
+        }
+
+        .initial-text p {
+            font-size: 0.9rem;
+            color: #b08978;
+            margin-top: 8px;
+        }
+
+        /* Messaggio nascosto che compare al click */
+        .hidden-message {
+            display: none;
+            margin-top: 15px;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .hidden-message h2 {
+            font-size: 1.3rem;
+            color: #8c6250;
+            margin-bottom: 10px;
+        }
+
+        .hidden-message p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #6e4e41;
+        }
+
+        .signature {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #b08978;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" onclick="apriAuguri()">
+        <div class="diya-card" id="card">
+            
+            <!-- Icona della lampada con la fiamma CSS sopra -->
+            <div class="diya-icon">
+                🪔
+                <div class="fiamma" id="fiammaFiissa"></div>
+            </div>
+
+            <!-- Testo che si vede all'inizio -->
+            <div class="initial-text" id="testoIniziale">
+                <h1>Bandi Chhor Divas</h1>
+                <p>Tocca per accendere la luce ✨</p>
+            </div>
+
+            <!-- Messaggio che appare dopo il click -->
+            <div class="hidden-message" id="messaggioNascosto">
+                <h2>Felice Diwali!</h2>
+                <p>Che la luce di questa festa porti pace, gioia e prosperità infinita nella tua vita e in quella della tua famiglia.</p>
+                <div class="signature">( ˘ ³˘)♥ ✧ ˚ 🪷</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Audio opzionale (assicurati di avere un file audio nella repo se lo usi, altrimenti puoi rimuovere questa riga) -->
+    <audio id="audioFesta" src="magic.mp3"></audio>
+
+    <script>
+        function apriAuguri() {
+            const card = document.getElementById('card');
+            const testoIniziale = document.getElementById('testoIniziale');
+            const messaggioNascosto = document.getElementById('messaggioNascosto');
+            const audio = document.getElementById('audioFesta');
+
+            // Se la card non è ancora aperta, la attiviamo
+            if (!card.classList.contains('open')) {
+                card.classList.add('open');
+                testoIniziale.style.display = 'none';
+                messaggioNascosto.style.display = 'block';
+
+                // Prova a riprodurre l'audio
+                if (audio) {
+                    audio.play().catch(error => {
+                        console.log("Riproduzione audio bloccata dal browser o file mancante.");
+                    });
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
