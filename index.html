@@ -12,7 +12,6 @@
         }
 
         body {
-            /* Sfondo iniziale pulito e caldo */
             background-color: #fcf8f5;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
@@ -21,10 +20,9 @@
             height: 100vh;
             overflow: hidden;
             color: #5c4033;
-            transition: background 1s ease; /* Transizione morbida per lo sfondo luminoso */
+            transition: background 1s ease;
         }
 
-        /* Quando la pagina è attiva/accesa, lo sfondo diventa una sfumatura magica dal centro ai bordi */
         body.acceso {
             background: radial-gradient(circle, #fff3e6 0%, #edd3be 100%);
         }
@@ -43,64 +41,48 @@
             border-radius: 20px;
             padding: 40px 20px;
             box-shadow: 0 10px 25px rgba(92, 64, 51, 0.05);
-            transition: transform 0.3s ease, background 0.5s ease, border-color 0.5s ease;
-        }
-
-        body.acceso .diya-card {
-            background: #fffaf5;
-            border-color: #dfbcab;
-            box-shadow: 0 15px 35px rgba(218, 149, 107, 0.2);
+            transition: transform 0.3s ease;
         }
 
         .diya-card:hover {
             transform: translateY(-5px);
         }
 
-        /* Contenitore per le immagini/video della lampada */
+        /* Contenitore per video e immagine */
         .diya-media-container {
             position: relative;
-            width: 100px;
-            height: 100px;
+            width: 140px;
+            height: 140px;
             margin: 0 auto 15px auto;
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #1a1a1a; /* Sfondo scuro per il video */
+            border-radius: 15px;
+            overflow: hidden;
         }
 
-        /* Immagine della lampada spenta */
         .diya-img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             display: block;
         }
 
-        /* Video della lampada con il fuoco (inizialmente nascosto) */
         .diya-video {
             position: absolute;
-            width: 140px; /* Leggermente più grande per includere bene la fiamma */
-            height: 140px;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             display: none;
-            /* Il trucco magico: fa sparire completamente lo sfondo nero del video */
-            mix-blend-mode: screen; 
-            pointer-events: none;
         }
 
-        /* Testo iniziale */
         .initial-text h1 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: #8c6250;
             font-weight: 500;
-            margin-bottom: 5px;
         }
 
-        .initial-text p {
-            font-size: 0.85rem;
-            color: #b08978;
-        }
-
-        /* Messaggio nascosto */
         .hidden-message {
             display: none;
             margin-top: 10px;
@@ -108,32 +90,14 @@
         }
 
         .hidden-message h2 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #8c6250;
             margin-bottom: 8px;
         }
 
-        .hidden-message p {
-            font-size: 0.9rem;
-            color: #6e4e41;
-            line-height: 1.4;
-        }
-
-        .signature {
-            margin-top: 15px;
-            font-size: 0.85rem;
-            color: #b08978;
-        }
-
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -143,24 +107,18 @@
         <div class="diya-card" id="card">
             
             <div class="diya-media-container">
-                <!-- Immagine della lampada spenta (assicurati di caricarla col nome diya-off.png o cambia il nome qui sotto) -->
-                <img src="diya-off.png" alt="Diya Spenta" class="diya-img" id="imgSpenta">
-                
-                <!-- Video della lampada accesa con il fuoco (assicurati di caricarlo col nome fuoco.mp4) -->
+                <img src="diya-off.png" alt="Diya" class="diya-img" id="imgSpenta">
                 <video src="fuoco.mp4" class="diya-video" id="videoFuoco" autoplay loop muted playsinline></video>
             </div>
 
-            <!-- Testo iniziale in Punjabi -->
             <div class="initial-text" id="testoIniziale">
                 <h1>ਬੰਦੀ ਛੋੜ ਦਿਵਸ</h1>
                 <p>Tocca per accendere ✨</p>
             </div>
 
-            <!-- Messaggio essenziale -->
             <div class="hidden-message" id="messaggioNascosto">
                 <h2>ਬੰਦੀ ਛੋੜ ਦਿਵਸ</h2>
                 <p>Buon grandissimo Divas!</p>
-                <div class="signature">( ˘ ³˘)♥ ✧ ˚ 🪷</div>
             </div>
 
         </div>
@@ -178,12 +136,10 @@
                 card.classList.add('attivo');
                 document.body.classList.add('acceso');
                 
-                // Nascondi l'immagine spenta e mostra il video con il fuoco
                 imgSpenta.style.display = 'none';
                 videoFuoco.style.display = 'block';
                 videoFuoco.play();
 
-                // Cambia i testi
                 testoIniziale.style.display = 'none';
                 messaggioNascosto.style.display = 'block';
             }
@@ -191,4 +147,4 @@
     </script>
 
 </body>
-</html></html>
+</html>
